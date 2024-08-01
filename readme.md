@@ -49,7 +49,7 @@ Ensure you are using Python version 3.12.
 To train and evaluate the models, run the `app.py` script:
 
 ```bash
-python iris_classification.py
+python app.py.py
 ```
 
 This script will load the dataset, preprocess the data, train each model, and output the evaluation metrics for each model.
