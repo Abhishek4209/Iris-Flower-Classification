@@ -21,7 +21,7 @@ from src.utils import evaluate_model
 
 ## Model trainig config class:
 @dataclass
-class ModelTrainingConfig:
+class ModelTrainerConfig:
     trained_model_file_path=os.path.join('artifacts','model.pkl')
     
 
@@ -34,8 +34,10 @@ class ModelTraining:
         try:
             logging.info('Spliting Dependent and Independent variables from train and test data')
             X_train,y_train,X_test,y_test=(
-                
-                
+                train_array[:,:-1],
+                train_array[:,-1],
+                test_array[:,:-1],
+                test_array[:,-1]
             )
             models={
     'LogisticRegression':LogisticRegression(),
@@ -61,16 +63,16 @@ class ModelTraining:
             
             best_model = models[best_model_name]
 
-            print(f'Best Model Found , Model Name : {best_model_name} , R2 Score : {best_model_score}')
+            print(f'Best Model Found , Model Name : {best_model_name} , accuracy : {best_model_score}')
             print('\n====================================================================================\n')
-            logging.info(f'Best Model Found , Model Name : {best_model_name} , R2 Score : {best_model_score}')
+            logging.info(f'Best Model Found , Model Name : {best_model_name} , accuracy : {best_model_score}')
 
             save_objects(
                 file_path=self.model_trainer_config.trained_model_file_path,
                 obj=best_model
             )
         
-            logging.info('Best Model :{best_model} with accuracy : {best_model_score}')
+            logging.info(f'Best Model :{best_model} with accuracy : {best_model_score}')
         
         except Exception as e:
             raise CustomException(e,sys)

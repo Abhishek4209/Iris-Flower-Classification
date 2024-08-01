@@ -5,13 +5,13 @@ import sys
 from src.logger import logging
 from src.exception import CustomException
 from src.components.data_ingestion import DataIngestion
-from dataclass import dataclass
+from dataclasses import dataclass
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import OneHotEncoder
-
+from src.utils import save_objects
 
 ## Data Transformation config class:
 @dataclass
@@ -27,7 +27,7 @@ class DataTransformation:
         try:
             logging.info('Data Transformation initiated')
             
-            numeric_features=[]
+            numeric_features=['sepal_length', 'sepal_width', 'petal_length', 'petal_width']
             categorical_features=[]
             
             logging.info('Pipeline Intitiated')
@@ -46,8 +46,8 @@ class DataTransformation:
             
             
             preprocessor=ColumnTransformer([
-            ('num_pipeline',num_pipeline,numerical_columns.columns.tolist()),
-            ('cat_pipeline',cat_pipeline,categorical_columns.columns.tolist())
+            ('num_pipeline',num_pipeline,numeric_features),
+            ('cat_pipeline',cat_pipeline,categorical_features)
             ])
             
             logging.info('Pipeline Completed')
@@ -93,7 +93,7 @@ class DataTransformation:
             train_arr=np.c_[input_feature_train_arr,np.array(target_feature_train_df)]
             test_arr=np.c_[input_feature_test_arr,np.array(target_feature_test_df)]
             
-            save_object(
+            save_objects(
                 file_path=self.data_transformation_config.preprocessor_obj_file_path,
                 obj=preprocessing_obj)
             

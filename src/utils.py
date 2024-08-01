@@ -5,10 +5,7 @@ import pickle
 import sys
 from src.logger import logging
 from src.exception import CustomException
-from src.components.data_ingestion import DataIngestion
-from src.components.data_transformation import DataTransformation
-from src.components.model_training import ModelTraining
-
+from sklearn.metrics import accuracy_score
 
 def save_objects(file_path,obj):
     try:

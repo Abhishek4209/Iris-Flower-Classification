@@ -3,8 +3,10 @@ import pandas as pd
 import os
 import sys
 from src.logger import logging
-from src.exceptions import CustomException
+from src.exception import CustomException
 from dataclasses import dataclass
+from sklearn.model_selection import train_test_split
+
 
 ## Data ingestion config:
 @dataclass
@@ -24,7 +26,9 @@ class DataIngestion:
             logging.info('Datasets read as Pandas DataFrame')
             
             os.makedirs(os.path.dirname(self.ingestion_config.raw_data_path),exist_ok=True)
+            df.to_csv(self.ingestion_config.raw_data_path,index=False)
             
+
             logging.info('Train test split')
             
             train_set,test_set=train_test_split(df,test_size=0.10,random_state=42)
