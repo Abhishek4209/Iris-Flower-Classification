@@ -57,7 +57,7 @@ Ensure you are using Python version 3.12.
 To train and evaluate the models, run the `app.py` script:
 
 ```bash
-python app.py.py
+python app.py
 ```
 
 This script will load the dataset, preprocess the data, train each model, and output the evaluation metrics for each model.
