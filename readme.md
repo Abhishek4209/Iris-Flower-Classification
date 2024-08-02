@@ -1,6 +1,7 @@
 
 # Iris Flower Classification Model
-E:\IRISFLOWERCLASSIFICATION\image.png
+
+![Iris Flower Classification](image.png)
 This project implements several machine learning models to classify the Iris flower dataset. The models used include Logistic Regression, Support Vector Classifier (SVC), Decision Tree Classifier, Random Forest Classifier, Gradient Boosting Classifier, AdaBoost Classifier, and K-Neighbors Classifier.
 
 ## Table of Contents
